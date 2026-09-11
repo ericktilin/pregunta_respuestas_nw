@@ -1,8 +1,14 @@
+/* =====================================================================
+   App.module.css
+   Estilos del layout global de 3 columnas (Layout.tsx).
+   Breakpoints: ≤1024px tablet, ≤640px móvil.
+   ===================================================================== */
 .layout {
   display: flex;
   min-height: 100vh;
 }
 
+/* ---------------- Sidebar izquierdo (~240px) ---------------- */
 .sidebar {
   width: var(--sidebar-width);
   background: var(--color-sidebar-bg);
@@ -15,38 +21,54 @@
   bottom: 0;
   z-index: 100;
   overflow-y: auto;
+  border-right: 1px solid var(--color-border);
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-lg) var(--spacing-md);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .logoIcon {
   width: 32px;
   height: 32px;
-  background: var(--color-accent);
-  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  color: white;
+  color: #fff;
+  flex-shrink: 0;
 }
 
 .logoText {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--color-sidebar-active);
-  letter-spacing: -0.5px;
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+}
+
+.logoSub {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
 }
 
 .nav {
   flex: 1;
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-sm) 0;
+}
+
+.navLabel {
+  padding: 14px var(--spacing-md) 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
 }
 
 .navItem {
@@ -54,11 +76,13 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: 10px var(--spacing-md);
+  margin: 2px var(--spacing-sm);
+  border-radius: 8px;
   color: var(--color-sidebar-text);
   text-decoration: none;
   font-size: 0.9rem;
-  border-left: 3px solid transparent;
-  transition: all 0.15s ease;
+  line-height: 1.3;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .navItem:hover {
@@ -69,17 +93,76 @@
 
 .navItemActive {
   composes: navItem;
-  background: var(--color-sidebar-hover);
+  background: var(--color-accent-light);
   color: var(--color-sidebar-active);
-  border-left-color: var(--color-accent);
+  font-weight: 600;
 }
 
 .navIcon {
-  width: 20px;
-  text-align: center;
-  font-size: 1rem;
+  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
 }
 
+.navItemActive .navIcon {
+  color: var(--color-accent);
+}
+
+/* Perfil de usuario al pie del sidebar */
+.userBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.userAvatarBig {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-sidebar-active);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userRole {
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+}
+
+.userRep {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--color-warning);
+  margin-top: 2px;
+}
+
+/* ---------------- Área central ---------------- */
 .mainArea {
   flex: 1;
   margin-left: var(--sidebar-width);
@@ -87,6 +170,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .header {
@@ -95,36 +179,91 @@
   border-bottom: 1px solid var(--color-header-border);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--spacing-md);
   padding: 0 var(--spacing-lg);
   position: sticky;
   top: 0;
   z-index: 50;
+  backdrop-filter: blur(6px);
 }
 
-.headerLeft {
+/* Búsqueda global con input  */
+.headerSearch {
+  position: relative;
+  flex: 1;
+  max-width: 560px;
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  color: var(--color-text-muted);
+  display: flex;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 16px 10px 42px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.searchInput:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
 }
 
 .headerRight {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
+  margin-left: auto;
+}
+
+.askBtn {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.askBtn:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
 }
 
 .themeToggle {
   background: none;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 6px 10px;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
   color: var(--color-text-secondary);
-  font-size: 1rem;
   display: flex;
   align-items: center;
-  gap: 4px;
-  transition: all 0.15s ease;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .themeToggle:hover {
@@ -132,25 +271,15 @@
   color: var(--color-text-primary);
 }
 
-.userAvatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--color-accent-light);
-  color: var(--color-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
 .content {
   flex: 1;
   padding: var(--spacing-lg);
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
 }
 
+/* ---------------- Sidebar derecho  ---------------- */
 .rightSidebar {
   width: var(--right-sidebar-width);
   background: var(--color-bg-secondary);
@@ -172,10 +301,10 @@
 }
 
 .panelTitle {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08em;
   color: var(--color-text-muted);
   margin-bottom: var(--spacing-md);
 }
@@ -185,23 +314,18 @@
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-.expertCard:last-child {
-  border-bottom: none;
 }
 
 .expertAvatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--color-accent-light);
   color: var(--color-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.75rem;
   flex-shrink: 0;
 }
@@ -215,24 +339,148 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .expertRole {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--color-text-muted);
 }
 
-.quickAccessLink {
+.expertStat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--color-success);
+}
+
+.catRow {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) 0;
-  color: var(--color-text-secondary);
   text-decoration: none;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.catRow:last-child {
+  border-bottom: none;
+}
+
+.catRow:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.catDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.catName {
+  flex: 1;
   font-size: 0.85rem;
 }
 
-.quickAccessLink:hover {
-  color: var(--color-accent);
-  text-decoration: none;
+.catCount {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: var(--color-bg-tertiary);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+
+/* --- Tablet: oculta el sidebar derecho --- */
+@media (max-width: 1024px) {
+  .rightSidebar {
+    display: none;
+  }
+  .mainArea {
+    margin-right: 0;
+  }
+}
+
+/* --- Móvil: sidebar profundo pasa a barra superior --- */
+@media (max-width: 640px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  /* El sidebar deja de ser fijo y se vuelve una barra horizontal. */
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    bottom: auto;
+    flex-direction: row;
+    align-items: center;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .logo {
+    flex-shrink: 0;
+    padding: 12px var(--spacing-md);
+    border-bottom: none;
+  }
+
+  /* Menú en fila con scroll lateral. */
+  .nav {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navItem,
+  .navItemActive {
+    margin: 6px;
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+
+  /*  perfil de usuario se quita para no saturar */
+  .userBar {
+    display: none;
+  }
+
+  .mainArea {
+    margin-left: 0;
+  }
+
+  .header {
+    padding: 0 var(--spacing-sm);
+    gap: var(--spacing-xs);
+  }
+
+  .headerSearch {
+    min-width: 0;
+  }
+
+  /* Botón "Hacer una pregunta": queda solo el icono. */
+  .askBtn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .content {
+    padding: var(--spacing-md);
+  }
 }

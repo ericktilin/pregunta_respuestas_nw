@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Layout from './Layout'
 import Dashboard from './pages/Dashboard'
 import ThreadView from './pages/ThreadView'
-import KnowledgeBase from './pages/KnowledgeBase'
 import ReusableModules from './pages/ReusableModules'
+import ProjectDetail from './pages/ProjectDetail'
 import SearchResults from './pages/SearchResults'
 import MyQuestions from './pages/MyQuestions'
 import Categories from './pages/Categories'
@@ -25,8 +25,8 @@ function App() {
             <Route path="/thread/:id" element={<ThreadView />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/my-questions" element={<MyQuestions />} />
-            <Route path="/knowledge-base" element={<KnowledgeBase />} />
             <Route path="/reusable-modules" element={<ReusableModules />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/new-question" element={<NewQuestion />} />
             <Route path="/new-module" element={<NewModule />} />

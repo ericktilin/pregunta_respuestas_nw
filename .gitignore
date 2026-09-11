@@ -10,6 +10,9 @@ build/
 .env.local
 .env.*.local
 
+# Archivos subidos por los usuarios (nunca al repositorio)
+backend/uploads/
+
 # Logs
 logs/
 *.log
@@ -26,3 +29,6 @@ Thumbs.db
 
 # Vite/TypeScript
 *.tsbuildinfo
+
+# Oracle Wallet
+oracle_wallet/

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Icon from '../components/Icon'
 
 export default function SearchResults() {
   const [query, setQuery] = useState('vlan')
@@ -7,17 +8,19 @@ export default function SearchResults() {
   const results = query
     ? [
         { title: 'Configuración de router Cisco ASR-920 para segmentación VLAN', snippet: '...implementando segmentación de red en el nuevo datacenter...', type: 'Pregunta', author: 'Carlos López' },
-        { title: 'Guía de configuración de VLANs en switches Cisco', snippet: 'Procedimiento estándar para crear y administrar VLANs...', type: 'Base de Conocimiento', author: 'María García' },
+        { title: 'Central Logger', snippet: 'Librería reutilizable de logging estructurado para microservicios...', type: 'Módulo', author: 'María García' },
       ]
     : []
 
-  const filters = ['Todas', 'Preguntas', 'Base de Conocimiento', 'Módulos']
+  const filters = ['Todas', 'Preguntas', 'Módulos']
 
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
         <div style={{ position: 'relative' }}>
-          <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }}>🔍</span>
+          <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)', display: 'flex' }}>
+            <Icon name="search" size={18} />
+          </span>
           <input
             type="text"
             value={query}
@@ -64,7 +67,9 @@ export default function SearchResults() {
 
       {query && results.length === 0 && (
         <div style={{ textAlign: 'center', padding: '48px 0', color: 'var(--color-text-muted)' }}>
-          <div style={{ fontSize: '3rem', marginBottom: 16 }}>🔍</div>
+          <div style={{ fontSize: '3rem', marginBottom: 16 }}>
+            <Icon name="search" size={40} />
+          </div>
           <h3 style={{ color: 'var(--color-text-secondary)', marginBottom: 8 }}>
             No se encontraron resultados
           </h3>
@@ -99,8 +104,10 @@ export default function SearchResults() {
 
       {!query && (
         <div style={{ textAlign: 'center', padding: '48px 0', color: 'var(--color-text-muted)' }}>
-          <div style={{ fontSize: '3rem', marginBottom: 16 }}>🔍</div>
-          <p style={{ fontSize: '0.9rem' }}>Escribe algo para buscar en toda la base de conocimiento</p>
+          <div style={{ fontSize: '3rem', marginBottom: 16 }}>
+            <Icon name="search" size={40} />
+          </div>
+          <p style={{ fontSize: '0.9rem' }}>Escribe algo para buscar preguntas, temas y proyectos</p>
         </div>
       )}
     </div>

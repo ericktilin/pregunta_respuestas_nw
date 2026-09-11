@@ -11,7 +11,7 @@ interface ThemeStore {
 const getInitialTheme = (): Theme => {
   const stored = localStorage.getItem('network-cerebro-theme')
   if (stored === 'light' || stored === 'dark') return stored
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return 'dark'
 }
 
 const applyTheme = (theme: Theme) => {
